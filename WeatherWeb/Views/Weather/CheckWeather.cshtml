@@ -1,0 +1,52 @@
+﻿@using WeatherWeb.Models
+@model WeatherModel
+@{
+    string fullDateTimeNumber = BaseModel.GetDateTimeString();
+}
+@section css {
+    <link href="~/Content/themes/base/jquery-ui.css"
+          rel="stylesheet"
+          type="text/css" />
+}
+@section Scripts {
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/Weather/init.js?@fullDateTimeNumber"></script>
+    <script src="~/Scripts/Weather/jquery.indexeddb.js?@fullDateTimeNumber" type="text/javascript"></script>
+}
+<div >
+    @Html.LabelFor(model => model.location.name, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.HiddenFor(model => model.location.id)
+        @Html.EditorFor(model => model.location.name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.location.name, "Please inter Chinese", new { @class = "text-danger" })
+    </div>
+</div>
+<div>
+    <button type="button" onclick="btn_onClick()">CHECK!</button>
+</div>
+<table id="weatherTable" hidden>
+    <tr>
+        <th>發布時間:</th>
+        <td><label id="time" type="text"></label></td>
+    </tr>
+    <tr>
+        <th>天氣概要:</th>
+        <td><label id="desc" type="text"></label></td>
+    </tr>
+    <tr>
+        <th>氣溫:</th>
+        <td><label id="temperature" type="text"></label></td>
+    </tr>
+    <tr>
+        <th>體感溫度:</th>
+        <td><label id="felt_air_temp" type="text"></label></td>
+    </tr>
+    <tr>
+        <th>濕度:</th>
+        <td><label id="humidity" type="text"></label></td>
+    </tr>
+    <tr>
+        <th>降雨量:</th>
+        <td><label id="rainfall" type="text"></label></td>
+    </tr>
+</table>
